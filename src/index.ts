@@ -1,2 +1,2 @@
-export * from './providers/Express';
-export * from './providers/logger';
+export { default as Express } from './providers/Express';
+export { default as logger } from './providers/logger';
