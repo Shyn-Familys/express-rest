@@ -11,10 +11,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "start": "tsc --watch",
     "build": "tsc",
-    "test": "tsc test",
-    "lint": "tsc lint",
     "prepare": "tsc"
   },
   "peerDependencies": {},
