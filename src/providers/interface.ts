@@ -7,7 +7,7 @@ interface Controller {
 }
 
 export interface DB {
-  connect: (string) => void;
+  connect: (url: string) => void;
 }
 
 export interface DBConfig {

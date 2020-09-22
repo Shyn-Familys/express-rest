@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import { logger } from '@shyn123/express-rest';
+import logger from '../providers/logger';
 
 const MongoDB = {
-  connect: async (mongoURL: string): void => {
+  connect: async (mongoURL: string): Promise<void> => {
     try {
       const conn = await mongoose.connect(mongoURL, {
         useNewUrlParser: true,
