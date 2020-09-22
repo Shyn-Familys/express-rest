@@ -15,7 +15,7 @@ class Express {
 
   constructor(appInit: {
     port: number;
-    databases: DBConfig[];
+    databaseConfigs: DBConfig[];
     middleWares: AppConstructor;
     controllers: AppConstructor;
   }) {
@@ -23,7 +23,7 @@ class Express {
     this.port = appInit.port;
 
     this.middlewares(appInit.middleWares);
-    this.connectDatabase(appInit.databases);
+    this.connectDatabase(appInit.databaseConfigs);
     this.routes(appInit.controllers);
   }
 
