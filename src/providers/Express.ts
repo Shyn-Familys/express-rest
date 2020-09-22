@@ -4,7 +4,7 @@ import { Application } from 'express';
 import httpStatus from 'http-status';
 import logger from './logger';
 import { Socket } from 'socket.io';
-import { DB } from './interface';
+import { DB, DBConfig } from './interface';
 interface AppConstructor {
   forEach: (arg0: (controller: any) => void) => void;
 }
@@ -40,9 +40,9 @@ class Express {
       this.app.use(middleWare);
     });
   }
-  private connectDatabase(databases: DB[]): void {
-    databases.forEach((database: DB) => {
-      database.connect();
+  private connectDatabase(databaseConfigs: DBConfig[]): void {
+    databaseConfigs.forEach(({ database, url }: DBConfig) => {
+      database.connect(url);
     });
   }
   public listen(): http.Server {

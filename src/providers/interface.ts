@@ -7,7 +7,12 @@ interface Controller {
 }
 
 export interface DB {
-  connect: () => void;
+  connect: (string) => void;
+}
+
+export interface DBConfig {
+  database: DB;
+  url: string;
 }
 
 export default Controller;
