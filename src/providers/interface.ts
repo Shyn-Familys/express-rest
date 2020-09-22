@@ -6,4 +6,8 @@ interface Controller {
   initializeRoutes: () => void;
 }
 
+export interface DB {
+  connect: () => void;
+}
+
 export default Controller;
