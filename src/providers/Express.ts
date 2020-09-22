@@ -15,7 +15,7 @@ class Express {
 
   constructor(appInit: {
     port: number;
-    databases: DB[];
+    databases: DBConfig[];
     middleWares: AppConstructor;
     controllers: AppConstructor;
   }) {
