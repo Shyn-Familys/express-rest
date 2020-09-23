@@ -62,7 +62,7 @@ const app = new Express({
 });
 
 const server = app.listen();
-useSocket(require('socket.io')(server))
+app.useSocket(require('socket.io')(server))
 
 ```
 
