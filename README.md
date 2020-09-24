@@ -43,7 +43,7 @@ import 'module-alias/register';
 require('dotenv').config();
 import cors from 'cors';
 import morgan from 'morgan';
-import { Expres, MongoDB } from '@shyn123/express-rest';
+import { Express, MongoDB } from '@shyn123/express-rest';
 
 const MDW = [cors(), morgan('dev')];
 
