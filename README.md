@@ -79,13 +79,13 @@ class KahootController extends CrudController implements Controller {
   }
 
   initializeRoutes = () => {
-    this.router.post(this.path, requireAuth, this.post);
+    this.router.post(this.path, requireAuth, this.create);
     this.router.get(this.path, requireAuth, this.getAll);
     this.router.put(`${this.path}/:id`, requireAuth, this.update);
-    this.router.get(`${this.path}/:id`, requireAuth, this.getKahoot);
+    this.router.get(`${this.path}/:id`, requireAuth, this.getById);
     this.router.delete(`${this.path}/:id`, requireAuth, this.deleteById);
   };
-  private getKahoot = async (req: express.Request, res: express.Response) => {
+  private getById = async (req: express.Request, res: express.Response) => {
     try {
       const { id } = req.params;
       const data = await this.model.findById(id).populate('questions').lean();

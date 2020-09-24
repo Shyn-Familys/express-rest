@@ -1,12 +1,12 @@
 import * as express from 'express';
 import status from 'http-status';
-import Response from '../providers/Response';
+import { Response } from '@shyn123/express-rest';
 
 export default abstract class CrudController {
   abstract model: any;
   public router = express.Router();
 
-  abstract getAll = async (req: express.Request, res: express.Response) => {
+  getAll = async (req: express.Request, res: express.Response) => {
     try {
       const data = await this.model.find().lean();
       return Response(res, { data });
@@ -15,7 +15,7 @@ export default abstract class CrudController {
     }
   };
 
-  abstract getById = async (req: express.Request, res: express.Response) => {
+  getById = async (req: express.Request, res: express.Response) => {
     try {
       const { id } = req.params;
       const data = await this.model.findById(id).lean();
@@ -34,7 +34,7 @@ export default abstract class CrudController {
     }
   };
 
-  abstract post = async (req: express.Request, res: express.Response) => {
+  create = async (req: express.Request, res: express.Response) => {
     try {
       const data = new this.model(req.body);
       await data.save();
@@ -48,7 +48,7 @@ export default abstract class CrudController {
     }
   };
 
-  abstract deleteById = async (req: express.Request, res: express.Response) => {
+  deleteById = async (req: express.Request, res: express.Response) => {
     try {
       const { id } = req.params;
       const data = await this.model.findByIdAndDelete(id).lean();
@@ -67,7 +67,7 @@ export default abstract class CrudController {
     }
   };
 
-  abstract update = async (req: express.Request, res: express.Response) => {
+  update = async (req: express.Request, res: express.Response) => {
     try {
       const { id } = req.params;
       const data = await this.model
