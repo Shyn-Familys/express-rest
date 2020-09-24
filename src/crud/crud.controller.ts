@@ -6,7 +6,7 @@ export default abstract class CrudController {
   abstract model: any;
   public router = express.Router();
 
-  getAll = async (req: express.Request, res: express.Response) => {
+  abstract getAll = async (req: express.Request, res: express.Response) => {
     try {
       const data = await this.model.find().lean();
       return Response(res, { data });
@@ -14,7 +14,8 @@ export default abstract class CrudController {
       return Response(res, { error: error }, status.INTERNAL_SERVER_ERROR);
     }
   };
-  getById = async (req: express.Request, res: express.Response) => {
+
+  abstract getById = async (req: express.Request, res: express.Response) => {
     try {
       const { id } = req.params;
       const data = await this.model.findById(id).lean();
@@ -32,7 +33,8 @@ export default abstract class CrudController {
       return Response(res, { error: error }, status.INTERNAL_SERVER_ERROR);
     }
   };
-  post = async (req: express.Request, res: express.Response) => {
+
+  abstract post = async (req: express.Request, res: express.Response) => {
     try {
       const data = new this.model(req.body);
       await data.save();
@@ -45,7 +47,8 @@ export default abstract class CrudController {
       return Response(res, { error: error }, status.INTERNAL_SERVER_ERROR);
     }
   };
-  deleteById = async (req: express.Request, res: express.Response) => {
+
+  abstract deleteById = async (req: express.Request, res: express.Response) => {
     try {
       const { id } = req.params;
       const data = await this.model.findByIdAndDelete(id).lean();
@@ -63,7 +66,8 @@ export default abstract class CrudController {
       return Response(res, { error: error }, status.INTERNAL_SERVER_ERROR);
     }
   };
-  update = async (req: express.Request, res: express.Response) => {
+
+  abstract update = async (req: express.Request, res: express.Response) => {
     try {
       const { id } = req.params;
       const data = await this.model

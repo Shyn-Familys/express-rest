@@ -1,10 +1,8 @@
-import express from 'express';
+import express, { Application } from 'express';
 import * as http from 'http';
-import { Application } from 'express';
-import httpStatus from 'http-status';
-import logger from './logger';
 import { Socket } from 'socket.io';
-import { DB, DBConfig } from './interface';
+import { DBConfig } from './interface';
+import logger from './logger';
 interface AppConstructor {
   forEach: (arg0: (controller: any) => void) => void;
 }
