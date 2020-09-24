@@ -1,6 +1,6 @@
 import * as express from 'express';
 import status from 'http-status';
-import { Response } from '@shyn123/express-rest';
+import Response from '../providers/Response';
 
 export default abstract class CrudController {
   abstract model: any;
