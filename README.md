@@ -24,7 +24,7 @@ const app = new Express({
   middleWares: MDW,
   databaseConfigs: [{
     database: MongoDB,
-    url: +process.env.MONGO_URL
+    url: process.env.MONGO_URL
   }],
   controllers: [
     new AuthController(),
