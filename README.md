@@ -67,6 +67,7 @@ app.useSocket(require('socket.io')(server))
 ```
 
 If you want to use swagger at https://localhost:3000/api
+
 And put file \*.yml in docs folder
 
 ```
@@ -97,7 +98,8 @@ const app = new Express({
 const server = app.listen();
 ```
 
-IMPORTANT: you need add api.yml file in your swagger folder to run swagger
+IMPORTANT: you need add api.yml file in your swagger folder to run swagger.
+
 Example:
 
 ```
