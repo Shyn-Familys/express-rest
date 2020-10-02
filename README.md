@@ -15,7 +15,7 @@ import 'module-alias/register';
 require('dotenv').config();
 import cors from 'cors';
 import morgan from 'morgan';
-import { Expres, MongoDB } from '@shyn123/express-rest';
+import { Express, MongoDB } from '@shyn123/express-rest';
 
 const MDW = [cors(), morgan('dev')];
 
@@ -43,7 +43,7 @@ import 'module-alias/register';
 require('dotenv').config();
 import cors from 'cors';
 import morgan from 'morgan';
-import { Expres, MongoDB } from '@shyn123/express-rest';
+import { Express, MongoDB } from '@shyn123/express-rest';
 
 const MDW = [cors(), morgan('dev')];
 
@@ -64,6 +64,37 @@ const app = new Express({
 const server = app.listen();
 app.useSocket(require('socket.io')(server))
 
+```
+
+If you want to use swagger at https://localhost:3000/api
+And put file \*.yml in docs folder
+
+```
+import 'module-alias/register';
+require('dotenv').config();
+import cors from 'cors';
+import morgan from 'morgan';
+import { Express, MongoDB } from '@shyn123/express-rest';
+import { Swagger } from '@/swagger/config';
+
+const MDW = [cors(), morgan('dev')];
+
+const app = new Express({
+  port: +process.env.PORT || 3000,
+  middleWares: MDW,
+  databaseConfigs: [{
+    database: MongoDB,
+    url: +process.env.MONGO_URL
+  }],
+  controllers: [
+    new AuthController(),
+    new KahootController(),
+    new QuestionController(),
+    new Swagger('/api-docs', 'localhost:3000', 'docs')
+  ],
+});
+
+const server = app.listen();
 ```
 
 ### CRUD Controller
