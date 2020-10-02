@@ -97,6 +97,30 @@ const app = new Express({
 const server = app.listen();
 ```
 
+IMPORTANT: you need add api.yml file in your swagger folder to run swagger
+Example:
+
+```
+
+openapi: '3.0.0'
+info:
+  version: 1.0.0
+  title: API
+  license:
+    name: MIT
+servers:
+  - url: http://localhost:3000/
+security:
+  - BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: apiKey
+      in: header
+      name: x-access-token
+
+```
+
 ### CRUD Controller
 
 ```
