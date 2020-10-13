@@ -1,8 +1,9 @@
-import express, { Application } from 'express';
 import * as http from 'http';
+import logger from './logger';
 import { Socket } from 'socket.io';
 import { DBConfig } from './interface';
-import logger from './logger';
+import express, { Application } from 'express';
+
 interface AppConstructor {
   forEach: (arg0: (controller: any) => void) => void;
 }
