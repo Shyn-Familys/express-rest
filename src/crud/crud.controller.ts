@@ -1,6 +1,6 @@
 import * as express from 'express';
-import status from 'http-status';
 import Response from '../providers/Response';
+import Exceptions from '../providers/Exception';
 
 export default abstract class CrudController {
   abstract model: any;
@@ -11,7 +11,7 @@ export default abstract class CrudController {
       const data = await this.model.find().lean();
       return Response(res, { data });
     } catch (error) {
-      return Response(res, { error: error }, status.INTERNAL_SERVER_ERROR);
+      return Exceptions.ServerError(res, error);
     }
   };
 
@@ -20,17 +20,11 @@ export default abstract class CrudController {
       const { id } = req.params;
       const data = await this.model.findById(id).lean();
       if (!data) {
-        return Response(
-          res,
-          {
-            message: `${id} not found`,
-          },
-          status.NOT_FOUND
-        );
+        return Exceptions.NotFound(res, id);
       }
       return Response(res, { data });
     } catch (error) {
-      return Response(res, { error: error }, status.INTERNAL_SERVER_ERROR);
+      return Exceptions.ServerError(res, error);
     }
   };
 
@@ -38,13 +32,9 @@ export default abstract class CrudController {
     try {
       const data = new this.model(req.body);
       await data.save();
-      return Response(
-        res,
-        { message: 'Create completed', data },
-        status.CREATED
-      );
+      return Exceptions.Create(res, data);
     } catch (error) {
-      return Response(res, { error: error }, status.INTERNAL_SERVER_ERROR);
+      return Exceptions.ServerError(res, error);
     }
   };
 
@@ -53,17 +43,11 @@ export default abstract class CrudController {
       const { id } = req.params;
       const data = await this.model.findByIdAndDelete(id).lean();
       if (!data) {
-        return Response(
-          res,
-          {
-            message: `${id} not found`,
-          },
-          status.NOT_FOUND
-        );
+        return Exceptions.NotFound(res, id);
       }
-      return Response(res, { message: 'Delete completed', data });
+      return Exceptions.Delete(res, data);
     } catch (error) {
-      return Response(res, { error: error }, status.INTERNAL_SERVER_ERROR);
+      return Exceptions.ServerError(res, error);
     }
   };
 
@@ -80,11 +64,11 @@ export default abstract class CrudController {
         )
         .lean();
       if (!data) {
-        return Response(res, { message: `${id} not found` }, status.NOT_FOUND);
+        return Exceptions.NotFound(res, id);
       }
-      return Response(res, { message: 'Edit completed', data }, status.OK);
+      return Exceptions.Edit(res, data);
     } catch (error) {
-      return Response(res, { error: error }, status.INTERNAL_SERVER_ERROR);
+      return Exceptions.ServerError(res, error);
     }
   };
 }
