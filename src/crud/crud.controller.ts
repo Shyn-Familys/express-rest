@@ -1,6 +1,6 @@
 import * as express from 'express';
 import Response from '../providers/Response';
-import Exceptions from '../providers/Exception';
+import Exception from '../providers/Exception';
 
 export default abstract class CrudController {
   abstract model: any;
@@ -11,7 +11,7 @@ export default abstract class CrudController {
       const data = await this.model.find().lean();
       return Response(res, { data });
     } catch (error) {
-      return Exceptions.ServerError(res, error);
+      return Exception.ServerError(res, error);
     }
   };
 
@@ -20,11 +20,11 @@ export default abstract class CrudController {
       const { id } = req.params;
       const data = await this.model.findById(id).lean();
       if (!data) {
-        return Exceptions.NotFound(res, id);
+        return Exception.NotFound(res, id);
       }
       return Response(res, { data });
     } catch (error) {
-      return Exceptions.ServerError(res, error);
+      return Exception.ServerError(res, error);
     }
   };
 
@@ -32,9 +32,9 @@ export default abstract class CrudController {
     try {
       const data = new this.model(req.body);
       await data.save();
-      return Exceptions.Create(res, data);
+      return Exception.Create(res, data);
     } catch (error) {
-      return Exceptions.ServerError(res, error);
+      return Exception.ServerError(res, error);
     }
   };
 
@@ -43,11 +43,11 @@ export default abstract class CrudController {
       const { id } = req.params;
       const data = await this.model.findByIdAndDelete(id).lean();
       if (!data) {
-        return Exceptions.NotFound(res, id);
+        return Exception.NotFound(res, id);
       }
-      return Exceptions.Delete(res, data);
+      return Exception.Delete(res, data);
     } catch (error) {
-      return Exceptions.ServerError(res, error);
+      return Exception.ServerError(res, error);
     }
   };
 
@@ -64,11 +64,11 @@ export default abstract class CrudController {
         )
         .lean();
       if (!data) {
-        return Exceptions.NotFound(res, id);
+        return Exception.NotFound(res, id);
       }
-      return Exceptions.Edit(res, data);
+      return Exception.Edit(res, data);
     } catch (error) {
-      return Exceptions.ServerError(res, error);
+      return Exception.ServerError(res, error);
     }
   };
 }

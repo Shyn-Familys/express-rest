@@ -2,7 +2,7 @@ import status from 'http-status';
 import { Response } from 'express';
 import { default as HttpResponse } from './Response';
 
-const Exceptions = {
+const Exception = {
   NotFound: (res: Response, input: string) => {
     return HttpResponse(
       res,
@@ -38,4 +38,4 @@ const Exceptions = {
   },
 };
 
-export default Exceptions;
+export default Exception;
