@@ -1,5 +1,5 @@
 {
-  "version": "0.3.8",
+  "version": "0.3.9",
   "license": "UNLICENSED",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,7 +30,7 @@
     "chalk": "^4.1.0",
     "express": "^4.17.1",
     "http-status": "^1.4.2",
-    "mongoose": "^5.10.6",
+    "mongoose": "^5.10.9",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {}
